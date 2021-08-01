@@ -47,7 +47,7 @@ With a python version greater than 3.6 installed, the following steps should be 
 7. Create .env file
 
    ```
-       cp .sample.env .env
+   cp .sample.env .env
    ```
 
 8. Replace the variables in `env` with correesponding values gotten from telegram
