@@ -1,7 +1,10 @@
 from telethon.sync import TelegramClient
 from telethon.tl.functions.messages import GetDialogsRequest
 from telethon.tl.types import InputPeerEmpty, InputPeerChannel, InputPeerUser
-from telethon.errors.rpcerrorlist import PeerFloodError, UserPrivacyRestrictedError, SessionPasswordNeededError
+from telethon.errors.rpcerrorlist import (PeerFloodError,
+                                          UserPrivacyRestrictedError,
+                                          SessionPasswordNeededError,
+                                          ChatWriteForbiddenError)
 from telethon.tl.functions.channels import InviteToChannelRequest
 import sys
 import csv
@@ -37,7 +40,7 @@ with open(input_file, encoding='UTF-8') as f:
         user['name'] = row[3]
         user["group"] = row[4]
         user["group_id"] = int(row[5])
-        user["phone_number"] = int(row[6])
+        user["phone_number"] = (row[6])
         users.append(user)
 
 chats = []
@@ -81,13 +84,13 @@ for user in users:
     if n % 50 == 0:
         time.sleep(900)
     try:
-        print("Adding {}".format(user['id']))
+        print("Adding {}".format(user['user_id']))
         if mode == 1:
             if user['username'] == "":
                 continue
             user_to_add = client.get_input_entity(user['username'])
         elif mode == 2:
-            user_to_add = InputPeerUser(user['id'], user['access_hash'])
+            user_to_add = InputPeerUser(user['user_id'], user['access_hash'])
         else:
             sys.exit("Invalid Mode Selected. Please Try Again.")
         client(InviteToChannelRequest(target_group_entity, [user_to_add]))
@@ -101,6 +104,9 @@ for user in users:
         print(
             "The user's privacy settings do not allow you to do this. Skipping."
         )
+    except ChatWriteForbiddenError:
+        print("You do not have the right to add people to this group")
+        quit()
     except:
         traceback.print_exc()
         print("Unexpected Error")
