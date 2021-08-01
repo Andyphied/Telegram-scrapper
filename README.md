@@ -54,15 +54,29 @@ With a python version greater than 3.6 installed, the following steps should be 
 
 9. Ensure mobile phone is close by before running script
 
-10. Start the script
+## Add members to a group
 
-    ```
-    python telescrapy.py
-    ```
+1. Start the script
 
-11. Input passcode sent to your mobile phone either as a text message or as a telegram message from telegram
+   ```
+   python get_members.py
+   ```
 
-12. If 2 step Authorization is activated, supply your passeord next and follow the rest of the instructions
+2. Input passcode sent to your mobile phone either as a text message or as a telegram message from telegram
+
+3. If 2 step Authorization is activated, supply your passeord next and follow the rest of the instructions
+
+## Scrape members from a group
+
+1. Start the script
+
+   ```
+   python add_members.py members.csv
+   ```
+
+2. Input passcode sent to your mobile phone either as a text message or as a telegram message from telegram
+
+3. If 2 step Authorization is activated, supply your passeord next and follow the rest of the instructions
 
 ### Notes
 
