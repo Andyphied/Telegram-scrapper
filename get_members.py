@@ -57,8 +57,8 @@ print('Saving In file...')
 with open("members.csv", "w", encoding='UTF-8') as f:
     writer = csv.writer(f, delimiter=",", lineterminator="\n")
     writer.writerow([
-        'username', 'user id', 'access hash', 'name', 'group', 'group id',
-        'phone number'
+        'username', 'user_id', 'access_hash', 'name', 'group', 'group_id',
+        'phone_number'
     ])
     for user in all_participants:
         if user.username:
