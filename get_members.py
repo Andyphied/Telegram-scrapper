@@ -37,6 +37,8 @@ for chat in chats:
     try:
         if chat.megagroup == True:
             groups.append(chat)
+        if chat.broadcast == True:
+            groups.append(chat)
     except:
         continue
 

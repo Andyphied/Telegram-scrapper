@@ -2,6 +2,7 @@ from telethon.sync import TelegramClient
 from telethon.tl.functions.messages import GetDialogsRequest
 from telethon.tl.types import InputPeerEmpty, InputPeerChannel, InputPeerUser
 from telethon.errors.rpcerrorlist import (PeerFloodError,
+                                          UserChannelsTooMuchError,
                                           UserPrivacyRestrictedError,
                                           SessionPasswordNeededError,
                                           ChatWriteForbiddenError)
@@ -60,6 +61,8 @@ for chat in chats:
     try:
         if chat.megagroup == True:
             groups.append(chat)
+        if chat.broadcast == True:
+            groups.append(chat)
     except:
         continue
 
@@ -104,6 +107,8 @@ for user in users:
         print(
             "The user's privacy settings do not allow you to do this. Skipping."
         )
+    except UserChannelsTooMuchError:
+        print("User in too much channel. Skipping.")
     except ChatWriteForbiddenError:
         print("You do not have the right to add people to this group")
         quit()
